@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Fetching from './Fetching';
+import Icon from './Icon';
+import Comments from './Comments';
+import Settings from './Settings';
 import { Query } from 'react-apollo';
 import { GET_PACKAGE } from '../graphql/Query';
 import styled from 'styled-components';
@@ -10,7 +13,9 @@ class App extends Component {
     super(props);
     this.state = {
       date: '',
-      today: ''
+      today: '',
+      settings: false,
+      comments: false
     };
   }
   componentDidMount() {
@@ -19,6 +24,7 @@ class App extends Component {
       today: moment().format('MMM D, YYYY')
     });
   }
+  closeModal = state => this.setState({ [state]: false });
   render() {
     return (
       <AppContainer className='App'>
@@ -41,6 +47,22 @@ class App extends Component {
             );
           }}
         </Query>
+        <Icon
+          icon='build'
+          color='white'
+          top='50%'
+          right='30px'
+          onClick={() => this.setState({ settings: true })}
+        />
+        <Icon
+          icon='comment'
+          color='white'
+          top='50%'
+          left='30px'
+          onClick={() => this.setState({ comments: true })}
+        />
+        {this.state.settings ? <Settings close={this.closeModal} /> : null}
+        {this.state.comments ? <Comments close={this.closeModal} /> : null}
       </AppContainer>
     );
   }
