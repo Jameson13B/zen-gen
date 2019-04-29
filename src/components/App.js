@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Fetching from './Fetching';
-import Icon from './Icon';
+import Dashboard from './Dashboard';
 import Comments from './Comments';
 import Settings from './Settings';
 import { Query } from 'react-apollo';
@@ -24,7 +24,7 @@ class App extends Component {
       today: moment().format('MMM D, YYYY')
     });
   }
-  closeModal = state => this.setState({ [state]: false });
+  closeModal = state => this.setState({ [state]: !this.state[state] });
   render() {
     return (
       <AppContainer className='App'>
@@ -47,20 +47,7 @@ class App extends Component {
             );
           }}
         </Query>
-        <Icon
-          icon='build'
-          color='white'
-          top='50%'
-          right='30px'
-          onClick={() => this.setState({ settings: true })}
-        />
-        <Icon
-          icon='comment'
-          color='white'
-          top='50%'
-          left='30px'
-          onClick={() => this.setState({ comments: true })}
-        />
+        <Dashboard close={this.closeModal} />
         {this.state.settings ? <Settings close={this.closeModal} /> : null}
         {this.state.comments ? <Comments close={this.closeModal} /> : null}
       </AppContainer>

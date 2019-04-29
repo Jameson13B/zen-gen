@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Icon = ({ icon, color, top, right, bottom, left, onClick }) => {
+const Icon = ({ icon, color, onClick, title }) => {
   return (
     <CustomIcon
       className='material-icons'
       color={color}
-      top={top}
-      right={right}
-      bottom={bottom}
-      left={left}
       onClick={onClick}
+      title={title}
     >
       {icon}
     </CustomIcon>
@@ -22,17 +19,16 @@ export default Icon;
 const CustomIcon = styled.i`
   color: ${props => props.color};
   font-size: 2em;
-  position: fixed;
-  top: ${props => props.top};
-  right: ${props => props.right};
-  bottom: ${props => props.bottom};
-  left: ${props => props.left};
   cursor: pointer;
-  transition: font-size 0.5s ease;
-  -webkit-transition: font-size 0.5s ease;
-  -moz-transition: font-size 0.5s ease;
-  -o-transition: font-size 0.5s ease;
   :hover {
-    font-size: 3em;
+    animation: App-logo-spin 1 0.5s linear;
+  }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
