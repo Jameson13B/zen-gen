@@ -16,7 +16,7 @@ const Dashboard = props => {
       <Icon
         icon='comment'
         color='white'
-        onClick={() => props.close('settings')}
+        onClick={() => props.close('comments')}
         title='Comments'
       />
       <br />
