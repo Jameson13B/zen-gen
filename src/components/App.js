@@ -15,7 +15,8 @@ class App extends Component {
       date: '',
       today: '',
       settings: false,
-      comments: false
+      comments: false,
+      theme: 'night'
     };
   }
   componentDidMount() {
@@ -25,6 +26,11 @@ class App extends Component {
     });
   }
   closeModal = state => this.setState({ [state]: !this.state[state] });
+  handleToggle = e => {
+    this.state.theme === 'day'
+      ? this.setState({ theme: 'night' })
+      : this.setState({ theme: 'day' });
+  };
   render() {
     return (
       <AppContainer className='App'>
@@ -35,7 +41,7 @@ class App extends Component {
             const curPackage = data.getPackage;
 
             return (
-              <Header className='App-header'>
+              <Header className='App-header' theme={this.state.theme}>
                 <h1>{this.state.today}</h1>
                 <img
                   src={curPackage.picture}
@@ -48,7 +54,13 @@ class App extends Component {
           }}
         </Query>
         <Dashboard close={this.closeModal} />
-        {this.state.settings ? <Settings close={this.closeModal} /> : null}
+        {this.state.settings ? (
+          <Settings
+            close={this.closeModal}
+            theme={this.state.theme}
+            handleToggle={this.handleToggle}
+          />
+        ) : null}
         {this.state.comments ? <Comments close={this.closeModal} /> : null}
       </AppContainer>
     );
@@ -62,7 +74,7 @@ const AppContainer = styled.div`
   text-align: center;
 `;
 const Header = styled.header`
-  background-color: #282c34;
+  background-color: ${props => (props.theme === 'day' ? '#eee' : '#282c34')};
   display: flex;
   height: 100vh;
   flex-direction: column;
