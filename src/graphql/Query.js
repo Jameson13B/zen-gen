@@ -8,6 +8,12 @@ export const GET_PACKAGE = gql`
       date
       advice
       picture
+    }
+  }
+`;
+export const GET_COMMENTS = gql`
+  query GetPackage($date: String!) {
+    getPackage(date: $date) {
       comments
     }
   }

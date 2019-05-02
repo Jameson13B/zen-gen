@@ -1,12 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 import CloseIcon from './CloseIcon';
+import { Query } from 'react-apollo';
+import { GET_COMMENTS } from '../graphql/Query';
+import Fetching from './Fetching';
 
 const Comments = props => {
   return (
     <Modal className='Comments'>
       <ModalContent>
         Comments
+        <Query query={GET_COMMENTS} variables={{ date: props.date }}>
+          {({ loading, error, data }) => {
+            if (loading) return <Fetching />;
+            if (error) return <div>Error</div>;
+            const comments = data.getPackage;
+
+            return (
+              <div>
+                {comments.comments.map((comment, i) => {
+                  return <li key={i}>{comment}</li>;
+                })}
+                {console.log(comments.comments)}
+              </div>
+            );
+          }}
+        </Query>
         <CloseIcon onClick={() => props.close('comments')} />
       </ModalContent>
     </Modal>

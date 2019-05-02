@@ -61,7 +61,9 @@ class App extends Component {
             handleToggle={this.handleToggle}
           />
         ) : null}
-        {this.state.comments ? <Comments close={this.closeModal} /> : null}
+        {this.state.comments ? (
+          <Comments close={this.closeModal} date={this.state.date} />
+        ) : null}
       </AppContainer>
     );
   }
