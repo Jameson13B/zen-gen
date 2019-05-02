@@ -9,7 +9,8 @@ const Comments = props => {
   return (
     <Modal className='Comments'>
       <ModalContent>
-        Comments
+        <h1>Comments</h1>
+        {/* Comment list */}
         <Query query={GET_COMMENTS} variables={{ date: props.date }}>
           {({ loading, error, data }) => {
             if (loading) return <Fetching />;
@@ -26,6 +27,7 @@ const Comments = props => {
             );
           }}
         </Query>
+        {/* Close Icon */}
         <CloseIcon onClick={() => props.close('comments')} />
       </ModalContent>
     </Modal>

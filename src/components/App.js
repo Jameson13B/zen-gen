@@ -16,18 +16,24 @@ class App extends Component {
       today: '',
       settings: false,
       comments: false,
-      night: false
+      night: null
     };
   }
   componentDidMount() {
+    let night = false;
+    if (localStorage.getItem('night')) {
+      night = JSON.parse(localStorage.getItem('night'));
+      console.log(night);
+    }
     this.setState({
       date: moment().format('YYYY-MM-DD'),
-      today: moment().format('MMM D, YYYY')
+      today: moment().format('MMM D, YYYY'),
+      night
     });
   }
   closeModal = state => this.setState({ [state]: !this.state[state] });
   handleToggle = e => {
-    console.log('toggle');
+    localStorage.setItem('night', !this.state.night);
     this.setState({ night: !this.state.night });
   };
   render() {

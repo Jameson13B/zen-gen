@@ -11,6 +11,7 @@ const Settings = props => {
         <h1>Settings</h1>
         {/* Day/Nite theme toggle */}
         <Toggle night={props.night} handleToggle={props.handleToggle} />
+        {/* Close icon */}
         <CloseIcon onClick={() => props.close('settings')} />
       </ModalContent>
     </Modal>
