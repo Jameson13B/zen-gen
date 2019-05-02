@@ -14,7 +14,7 @@ const WeatherBtn = props => {
   return (
     <Icon
       icon='ac_unit'
-      color='white'
+      color={props.night ? '#eee' : '#282c34'}
       onClick={handleWeather}
       title={props.title}
     >

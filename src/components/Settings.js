@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import CloseIcon from './CloseIcon';
+import Toggle from './Toggle';
+import './Toggle.css';
 
 const Settings = props => {
   return (
     <Modal className='Settings'>
       <ModalContent>
-        Settings
+        <h1>Settings</h1>
+        {/* Day/Nite theme toggle */}
+        <Toggle night={props.night} handleToggle={props.handleToggle} />
         <CloseIcon onClick={() => props.close('settings')} />
       </ModalContent>
     </Modal>

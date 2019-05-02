@@ -16,7 +16,7 @@ class App extends Component {
       today: '',
       settings: false,
       comments: false,
-      theme: 'night'
+      night: false
     };
   }
   componentDidMount() {
@@ -27,9 +27,8 @@ class App extends Component {
   }
   closeModal = state => this.setState({ [state]: !this.state[state] });
   handleToggle = e => {
-    this.state.theme === 'day'
-      ? this.setState({ theme: 'night' })
-      : this.setState({ theme: 'day' });
+    console.log('toggle');
+    this.setState({ night: !this.state.night });
   };
   render() {
     return (
@@ -41,7 +40,7 @@ class App extends Component {
             const curPackage = data.getPackage;
 
             return (
-              <Header className='App-header' theme={this.state.theme}>
+              <Header className='App-header' night={this.state.night}>
                 <h1>{this.state.today}</h1>
                 <img
                   src={curPackage.picture}
@@ -53,11 +52,11 @@ class App extends Component {
             );
           }}
         </Query>
-        <Dashboard close={this.closeModal} />
+        <Dashboard close={this.closeModal} night={this.state.night} />
         {this.state.settings ? (
           <Settings
             close={this.closeModal}
-            theme={this.state.theme}
+            night={this.state.night}
             handleToggle={this.handleToggle}
           />
         ) : null}
@@ -76,12 +75,12 @@ const AppContainer = styled.div`
   text-align: center;
 `;
 const Header = styled.header`
-  background-color: ${props => (props.theme === 'day' ? '#eee' : '#282c34')};
+  background-color: ${props => (props.night ? '#282c34' : '#eee')};
   display: flex;
   height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: ${props => (props.night ? '#eee' : '#282c34')};
 `;

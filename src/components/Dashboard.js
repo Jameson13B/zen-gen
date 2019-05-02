@@ -8,19 +8,19 @@ const Dashboard = props => {
     <DashboardContainer>
       <Icon
         icon='build'
-        color='white'
+        color={props.night ? '#eee' : '#282c34'}
         onClick={() => props.close('settings')}
         title='Settings'
       />
       <br />
       <Icon
         icon='comment'
-        color='white'
+        color={props.night ? '#eee' : '#282c34'}
         onClick={() => props.close('comments')}
         title='Comments'
       />
       <br />
-      <WeatherBtn title='Local Weather' />
+      <WeatherBtn title='Local Weather' night={props.night} />
     </DashboardContainer>
   );
 };
